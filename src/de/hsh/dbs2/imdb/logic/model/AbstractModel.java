@@ -20,6 +20,8 @@ public abstract class AbstractModel {
 			if (rs.next()) {
 				id = rs.getLong(1);
 			}
+			rs.close();
+			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

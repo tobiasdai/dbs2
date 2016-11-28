@@ -24,6 +24,7 @@ public class Movie extends AbstractModel {
 			stmt.setInt(3, year);
 			stmt.setString(4, type);
 			stmt.executeUpdate();
+			stmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

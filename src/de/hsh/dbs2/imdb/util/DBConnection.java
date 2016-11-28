@@ -11,7 +11,7 @@ public class DBConnection {
 		conn = null;
 		try {
 			conn = DriverManager.getConnection(
-					"jdbc:oracle:thin:@localhost:4711:db01", "user", "pwd");
+					"jdbc:oracle:thin:@localhost:4711:db01", "usrname", "pwd");
 			conn.setAutoCommit(false);
 			System.out.println("Connect durchgefuehrt ....");
 		} catch (Exception e) {

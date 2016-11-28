@@ -28,7 +28,24 @@ public class MovieGenreFactory {
 			mg.setGenreId(rs.getLong("genre"));
 			movieGenres.add(mg);
 		}
+		rs.close();
+		stmt.close();
 		return movieGenres;
+	}
+	
+	public static void delete(long movieId) throws SQLException {
+		String sql = "delete from hasgenre where movie = ?";
+		Connection conn = DBConnection.getConnection();
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setLong(1, movieId);
+		
+		stmt.executeUpdate();
+		stmt.close();
+	}
+	
+	public static void add(MovieGenre movieGenre) throws SQLException {
+		movieGenre.insert();
 	}
 	
 }

@@ -31,7 +31,24 @@ public class CharacterFactory {
 			character.setPlayerId(rs.getLong("personid"));
 			characters.add(character);
 		}
+		rs.close();
+		stmt.close();
 		return characters;
+	}
+	
+	public static void delete(long movieId) throws SQLException {
+		String sql = "delete from moviecharacter where movieid = ?";
+		Connection conn = DBConnection.getConnection();
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setLong(1, movieId);
+		
+		stmt.executeUpdate();
+		stmt.close();
+	}
+	
+	public static void add(MovieCharacter character) {
+		character.insert();
 	}
 	
 }

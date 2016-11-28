@@ -14,27 +14,24 @@ import java.util.ArrayList;
  */
 public class PersonFactory{
 	
-    public static ArrayList<Person> findByName(String name) {
+    public static ArrayList<Person> findByName(String name) throws SQLException {
         ArrayList<Person> arrayList = new ArrayList<>();
-        String sql = "SELECT * FROM PERSON WHERE NAME LIKE ?";
-        Connection conn = null;
-        try {
-            conn = DBConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1,"%"+name+"%");
-            ResultSet rs = stmt.executeQuery();
-            Person person;
-            if(rs.next()){
-                person = new Person();
-                person.setId(rs.getLong("PERSONID"));
-                person.setName(rs.getString("NAME"));
-                person.setSex(rs.getString("SEX"));
-                arrayList.add(person);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        String sql = "SELECT * FROM PERSON WHERE UPPER(NAME) LIKE UPPER(?)";
+        
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1,"%"+name+"%");
+        ResultSet rs = stmt.executeQuery();
+        Person person;
+        if(rs.next()){
+            person = new Person();
+            person.setId(rs.getLong("PERSONID"));
+            person.setName(rs.getString("NAME"));
+            person.setSex(rs.getString("SEX"));
+            arrayList.add(person);
         }
+        rs.close();
+		stmt.close();
         return arrayList;
     }
     
@@ -52,6 +49,8 @@ public class PersonFactory{
 			person.setName(rs.getString("name"));
 			person.setSex(rs.getString("sex"));
 		}
+		rs.close();
+		stmt.close();
     	return person;
 	}
 }

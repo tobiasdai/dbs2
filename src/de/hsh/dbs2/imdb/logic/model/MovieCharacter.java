@@ -28,6 +28,7 @@ public class MovieCharacter extends AbstractModel {
 			stmt.setLong(5, movieId);
 			stmt.setLong(6, playerId);
 			stmt.executeUpdate();
+			stmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

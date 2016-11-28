@@ -22,6 +22,7 @@ public class Person extends AbstractModel {
 			stmt.setString(2, name);
 			stmt.setString(3, sex);
 			stmt.executeUpdate();
+			stmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

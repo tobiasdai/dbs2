@@ -20,6 +20,7 @@ public class Genre extends AbstractModel {
 			stmt.setLong(1, id);
 			stmt.setString(2, genre);
 			stmt.executeUpdate();
+			stmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
